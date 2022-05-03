@@ -29,7 +29,7 @@ int main(){
     std::cout << "Example of add \n";
     std::cout << v + w << std::endl;
     
-    // vector scalar multiply
+    // vector scalar multiplyls
     std::cout << "Example of scalar multiply \n";
     std::cout << v * 3.0f << std::endl;
     std::cout << 2.0f * v << std::endl;
