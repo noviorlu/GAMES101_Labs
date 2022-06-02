@@ -3,6 +3,17 @@
 #include<eigen3/Eigen/Dense>
 #include<iostream>
 
+//宏定义
+// constexpr double MY_PI = 3.1415926;
+
+// #define ANGLE_TO_RADIAN(angle) angle / 180 * MY_PI
+
+// int main(){
+//     float a = 190;
+//     std::cout << ANGLE_TO_RADIAN(a) << std::endl;
+//     return 0;
+// }
+
 int main(){
 
     // Basic Example of cpp
