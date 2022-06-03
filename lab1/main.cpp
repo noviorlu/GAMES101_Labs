@@ -7,6 +7,24 @@
 constexpr double MY_PI = 3.1415926;
 #define ANGLE_TO_RADIAN(angle)(angle / 180 * MY_PI)
 
+Eigen::Matrix4f get_rotation(Vector3f axis, float angle){
+    angle = ANGLE_TO_RADIAN(angle);
+
+    Eigen::MatrixXf rotation = Eigen::Matrix3f::Identity();
+
+    Eigen::Matrix3f temp;
+    temp << 0, -axis(2), axis(1), axis(2), 0, -axis(0), -axis(2), axis(0), 0;
+
+    rotation = cos(angle) * Eigen::Matrix3f::Identity() + 
+            (1 - cos(angle)) * axis * axis.transpose() + 
+            sin(angle) * temp;
+
+    rotation.conservativeResize(rotation.rows()+1, rotation.cols()+1);
+    rotation(3, 3) = 1;
+
+    return rotation;
+}
+
 Eigen::Matrix4f get_model_matrix(float rotation_angle)
 {
     Eigen::Matrix4f model = Eigen::Matrix4f::Identity();
@@ -67,7 +85,7 @@ Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio,
         zNear, 0, 0, 0,
         0, zNear, 0, 0,
         0, 0, zNear+zFar, -zNear*zFar,
-        0, 0, 1, 0;
+        0, 0, -1, 0;
 
     return ortho * perspToOrtho;
 }
